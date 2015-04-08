@@ -1,0 +1,25 @@
+{{#grouped_each 4 status}}
+    <div class="row">
+        {{#each this}}
+            <div class="col s12 m3">
+                <div class="card {{#if this/offline}} tooltipped {{/if}} waves-effect waves-block waves-light" {{#if this/offline}} data-position="bottom" data-delay="100" data-tooltip="Last Seen: {{this/offline_date}}" {{/if}} >
+                    <div class="card-content">
+                        <span class="card-title black-text">{{this/friendly-name}}</span>
+                        {{#if this/offline}}
+                            <h3 class="red-text">Offline</h3>
+                        {{else}}
+                            <h3 class="green-text">Online</h3>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/grouped_each}}
+{{#if issues}}
+<div class="row">
+    <span class="white-text">Current Issues:</span>
+    <h6 class="green-text">Open: {{issues/open_count}}</h6>
+    <h6 class="red-text">Closed: {{issues/closed_count}}</h6>
+</div>
+{{/if}}

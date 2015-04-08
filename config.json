@@ -1,0 +1,57 @@
+{
+  "settings": {
+    "title": "DoESLiverpool's Status",
+    "timezone": "GMT",
+    "user-agent": "DoESLiverpool",
+    "gitapi": "935caa39e105518c3927851621062a57c6facea9"
+  },
+  "status": {
+    "site": {
+      "friendly-name": "DoESLiverpool Site",
+      "method": "WORDGET",
+      "freq": 10,
+      "showlatest": true,
+      "url": "http://doesliverpool.com/?json=get_recent_posts&count=1"
+    },
+    "gerald": {
+      "friendly-name": "Gerald the Gigantic Laser Cutter",
+      "method": "GIT",
+      "freq": 30,
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Gerald%20the%20Gigantic%20Laser%20Cutter,Broken&state=open"
+    },
+    "sophia": {
+      "friendly-name": "Sophia the Smaller Laser Cutter",
+      "method": "GIT",
+      "freq": 30,
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Sophia%20the%20Smaller%20Laser%20Cutter,Broken&state=open"
+    },
+    "reprap": {
+      "friendly-name": "RepRap the 3d Printer",
+      "method": "GIT",
+      "freq": 30,
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=RepRap,Broken&state=open"
+    },
+    "doorbot1": {
+      "friendly-name": "Doorbot 1",
+      "method": "POST",
+      "apikey": "sqs09UUHIAIwad"
+    },
+    "doorbot2": {
+      "friendly-name": "Doorbot 2",
+      "method": "POST",
+      "apikey": "diojawdwuh4yg"
+    },
+    "doorbot3": {
+      "friendly-name": "Doorbot 3",
+      "method": "POST",
+      "apikey": "IJOJhiuhGYGudw"
+    }
+  },
+  "issues": {
+    "service": "git",
+    "openformat": "open",
+    "closedformat": "closed",
+    "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues",
+    "freq": 30
+  }
+}
