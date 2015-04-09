@@ -1,15 +1,21 @@
+var http = require('http');
 var express = require('express');
+var app = module.exports = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
-var files = require('./lib/files.js');
-
-var index = require('./routes/index');
+var sockets = require('./lib/sockets.js');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+sockets.connect(io);
+var files = require('./lib/files');
 var api = require('./routes/api');
-var app = express();
+var index = require('./routes/index');
+
+server.listen(files.cfg['settings']['port']);
 
 hbs.registerHelper('grouped_each', function(every, context, options) {
   var out = "", subcontext = [], i = 0;
@@ -26,17 +32,6 @@ hbs.registerHelper('grouped_each', function(every, context, options) {
     out += options.fn(subcontext);
   }
   return out;
-});
-hbs.registerHelper("debug", function(optionalValue) {
-  console.log("Current Context");
-  console.log("====================");
-  console.log(this);
-
-  if (optionalValue) {
-    console.log("Value");
-    console.log("====================");
-    console.log(optionalValue);
-  }
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -83,6 +78,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

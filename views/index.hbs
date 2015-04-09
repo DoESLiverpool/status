@@ -2,13 +2,21 @@
     <div class="row">
         {{#each this}}
             <div class="col s12 m3">
-                <div class="card {{#if this/offline}} tooltipped {{/if}} waves-effect waves-block waves-light" {{#if this/offline}} data-position="bottom" data-delay="100" data-tooltip="Last Seen: {{this/offline_date}}" {{/if}} >
+                <div id="{{this/obj_name}}" class="card tooltipped waves-effect waves-block waves-light status" data-position="bottom" data-delay="100" {{#if this/offline}}data-tooltip="Last Seen: {{this/offline_date}}"{{else}}data-tooltip="Online Since: {{this/offline_date}}"{{/if}}>
                     <div class="card-content">
                         <span class="card-title black-text">{{this/friendly-name}}</span>
-                        {{#if this/offline}}
-                            <h3 class="red-text">Offline</h3>
+                        {{#if this/alttext}}
+                            {{#if this/offline}}
+                                <h3 class="red-text">Broken</h3>
+                            {{else}}
+                                <h3 class="green-text">Working</h3>
+                            {{/if}}
                         {{else}}
-                            <h3 class="green-text">Online</h3>
+                            {{#if this/offline}}
+                                <h3 class="red-text">Offline</h3>
+                            {{else}}
+                                <h3 class="green-text">Online</h3>
+                            {{/if}}
                         {{/if}}
                     </div>
                 </div>
@@ -17,9 +25,13 @@
     </div>
 {{/grouped_each}}
 {{#if issues}}
-<div class="row">
-    <span class="white-text">Current Issues:</span>
-    <h6 class="green-text">Open: {{issues/open_count}}</h6>
-    <h6 class="red-text">Closed: {{issues/closed_count}}</h6>
-</div>
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <div linkurl="{{issues/publink}}" id="issue-card" class="card tooltipped waves-effect waves-block waves-light" data-position="bottom" data-delay="100" data-tooltip="The current issues!">
+                <span class="card-title black-text">Current Issues:</span>
+                <h6 class="green-text" id="open-issues">Open: {{issues/open_count}}</h6>
+                <h6 class="red-text" id="closed-issues">Closed: {{issues/closed_count}}</h6>
+            </div>
+        </div>
+    </div>
 {{/if}}

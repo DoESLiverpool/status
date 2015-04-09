@@ -17,6 +17,19 @@ router.get('/:status', function(req, res, next) {
     res.redirect('/');
     return;
   }
+  if(files.cfg['settings']['xively'] != null){
+      var xively = {};
+      for(var a in files.cfg['status'][req.params.status]['xively-globals']){
+          xively[files.cfg['status'][req.params.status]['xively-globals'][a]] = files.cfg['xively-globals'][files.cfg['status'][req.params.status]['xively-globals'][a]];
+      }
+      res.render('status', {
+          title: files.cfg['settings']['title'],
+          status: files.cfg['status'][req.params.status],
+          issues: files.cfg['issues'],
+          xively: xively
+      });
+      return;
+  }
   res.render('status', {
       title: files.cfg['settings']['title'],
       status: files.cfg['status'][req.params.status],

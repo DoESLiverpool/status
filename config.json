@@ -2,8 +2,10 @@
   "settings": {
     "title": "DoESLiverpool's Status",
     "timezone": "GMT",
+    "port": 3000,
     "user-agent": "DoESLiverpool",
-    "gitapi": "935caa39e105518c3927851621062a57c6facea9"
+    "gitapi": "your-api-key",
+    "xively": "your-api-key"
   },
   "status": {
     "site": {
@@ -17,41 +19,69 @@
       "friendly-name": "Gerald the Gigantic Laser Cutter",
       "method": "GIT",
       "freq": 30,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Gerald%20the%20Gigantic%20Laser%20Cutter,Broken&state=open"
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Gerald%20the%20Gigantic%20Laser%20Cutter,Broken&state=open",
+      "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
+      "alttext": true
     },
     "sophia": {
       "friendly-name": "Sophia the Smaller Laser Cutter",
       "method": "GIT",
       "freq": 30,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Sophia%20the%20Smaller%20Laser%20Cutter,Broken&state=open"
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Sophia%20the%20Smaller%20Laser%20Cutter,Broken&state=open",
+      "alttext": true
     },
     "reprap": {
       "friendly-name": "RepRap the 3d Printer",
       "method": "GIT",
       "freq": 30,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=RepRap,Broken&state=open"
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=RepRap,Broken&state=open",
+      "alttext": true
     },
     "doorbot1": {
       "friendly-name": "Doorbot 1",
       "method": "POST",
-      "apikey": "sqs09UUHIAIwad"
+      "apikey": "sqs09UUHIAIwad",
+      "freq": 10
     },
     "doorbot2": {
       "friendly-name": "Doorbot 2",
       "method": "POST",
-      "apikey": "diojawdwuh4yg"
+      "apikey": "diojawdwuh4yg",
+      "freq": 10
     },
     "doorbot3": {
       "friendly-name": "Doorbot 3",
       "method": "POST",
-      "apikey": "IJOJhiuhGYGudw"
+      "apikey": "IJOJhiuhGYGudw",
+      "freq": 10
     }
+  },
+  "xively-globals": {
+      "water": {
+        "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Laserstemperature",
+        "xively-friendly-name": "Water Temp",
+        "xively-freq": 2,
+        "shown-on": ["gerald", "sophia"]
+      },
+      "sophia": {
+        "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Sophia",
+        "xively-friendly-name": "Sophia's Status",
+        "xively-freq": 2,
+        "shown-on": ["sophia"]
+      },
+      "gerald": {
+        "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
+        "xively-friendly-name": "Geralds's Status",
+        "xively-freq": 2,
+        "shown-on": ["gerald"]
+      }
   },
   "issues": {
     "service": "git",
     "openformat": "open",
     "closedformat": "closed",
     "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues",
+    "publink": "https://github.com/DoESLiverpool/somebody-should/issues",
     "freq": 30
   }
 }
