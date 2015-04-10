@@ -1,4 +1,4 @@
-#[DoesLiverpool Status!](http://status.doesliverpool.com)
+#[DoesLiverpool Status](http://status.doesliverpool.com)
 
 #Config
 
