@@ -79,4 +79,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
+process.on('uncaughtException', function(err) {
+  console.log(err.stack);
+});
+
 module.exports = app;
