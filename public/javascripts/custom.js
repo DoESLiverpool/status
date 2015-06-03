@@ -24,10 +24,10 @@ socket.on('update', function(id, status, state, date){
     if(state){
         if (state == false){
             $(id).find('h3').removeClass('red-text').addClass('green-text').text(status);
-            $(id).attr('data-tooltip').val(status + ' since: ' + date);
+            $(id).attr('data-tooltip', status + ' since: ' + date);
         }else{
             $(id).find('h3').removeClass('green-text').addClass('red-text').text(status);
-            $(id).attr('data-tooltip').val(status + ' since: ' + date);
+            $(id).attr('data-tooltip', status + ' since: ' + date);
         }
     }
     else{

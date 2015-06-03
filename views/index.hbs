@@ -2,7 +2,7 @@
     <div class="row">
         {{#each this}}
             <div class="col s12 m3">
-                <div class="card tooltipped" id="{{this/obj_name}}" data-position="bottom" data-delay="100" {{#if this/alttext}}{{#if this/offline}}data-tooltip="Broken Since: {{this/offline_date}}" {{else}}data-tooltip="Working Since: {{this/offline_date}}"{{/if}}{{else}}{{#if this/offline}}data-tooltip="Offline Since: {{this/offline_date}}"{{else}}data-tooltip="Online Since: {{this/offline_date}}"{{/if}}{{/if}}>
+                <div class="card tooltipped waves-effect waves-block waves-light status" id="{{this/obj_name}}" data-position="bottom" data-delay="100" {{#if this/alttext}}{{#if this/offline}}data-tooltip="Broken Since: {{this/offline_date}}" {{else}}data-tooltip="Working Since: {{this/offline_date}}"{{/if}}{{else}}{{#if this/offline}}data-tooltip="Offline Since: {{this/offline_date}}"{{else}}data-tooltip="Online Since: {{this/offline_date}}"{{/if}}{{/if}}>
                     <div class="card-content">
                         <span class="card-title black-text">{{this/friendly-name}}</span>
                         {{#if this/alttext}}
