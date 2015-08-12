@@ -1,11 +1,11 @@
 {
   "settings": {
     "title": "DoESLiverpool's Status",
-    "timezone": "+0000",
+    "timezone": "GMT",
     "port": 3000,
     "user-agent": "DoESLiverpool",
-    "gitapi": "your-api-key",
-    "xively": "your-api-key"
+    "gitapi": "8c9487cb2871993bbcb39b279178a79eb45f8286",
+    "xively": "9w52jPHF4wtsG3s81jxdVYPrJID9K3LwZZlPmXYtO2CfvF69"
   },
   "status": {
     "site": {
@@ -18,7 +18,7 @@
     "gerald": {
       "friendly-name": "Gerald the Gigantic Laser Cutter",
       "method": "GIT",
-      "freq": 30,
+      "freq": 10,
       "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Gerald%20the%20Gigantic%20Laser%20Cutter,Broken&state=open",
       "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
       "alttext": true
@@ -26,17 +26,38 @@
     "sophia": {
       "friendly-name": "Sophia the Smaller Laser Cutter",
       "method": "GIT",
-      "freq": 30,
+      "freq": 10,
       "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Sophia%20the%20Smaller%20Laser%20Cutter,Broken&state=open",
       "alttext": true
     },
     "reprap": {
       "friendly-name": "RepRap the 3d Printer",
       "method": "GIT",
-      "freq": 30,
+      "freq": 10,
       "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=RepRap,Broken&state=open",
       "alttext": true
     },
+    "violet": {
+      "friendly-name": "Violet the 3d Printer",
+      "method": "GIT",
+      "freq": 10,
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Violet,Broken&state=open",
+      "alttext": true
+    },
+    "rose": {
+      "friendly-name": "Rose the 3d Printer",
+      "method": "GIT",
+      "freq": 10,
+      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Rose,Broken&state=open",
+      "alttext": true
+    },
+	"ultiextended": {
+		"friendly-name": "Ultimaker 2 Extended",
+		"method": "GIT",
+		"freq": 10,
+		"url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Ultimaker%20Extended,Broken&state=open",
+		"alttext": true
+	}
     "doorbot1": {
       "friendly-name": "Doorbot 1",
       "method": "POST",
@@ -57,24 +78,24 @@
     }
   },
   "xively-globals": {
-      "water": {
-        "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Laserstemperature",
-        "xively-friendly-name": "Water Temp",
-        "xively-freq": 2,
-        "shown-on": ["gerald", "sophia"]
-      },
-      "sophia": {
-        "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Sophia",
-        "xively-friendly-name": "Sophia's Status",
-        "xively-freq": 2,
-        "shown-on": ["sophia"]
-      },
-      "gerald": {
-        "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
-        "xively-friendly-name": "Geralds's Status",
-        "xively-freq": 2,
-        "shown-on": ["gerald"]
-      }
+    "water": {
+      "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Laserstemperature",
+      "xively-friendly-name": "Water Temp",
+      "xively-freq": 2,
+      "shown-on": ["gerald", "sophia"]
+    },
+    "sophia": {
+      "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Sophia",
+      "xively-friendly-name": "Sophia's Status",
+      "xively-freq": 2,
+      "shown-on": ["sophia"]
+    },
+    "gerald": {
+      "xively-endpoint": "https://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
+      "xively-friendly-name": "Geralds's Status",
+      "xively-freq": 2,
+      "shown-on": ["gerald"]
+    }
   },
   "issues": {
     "service": "git",
