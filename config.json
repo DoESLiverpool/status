@@ -51,13 +51,13 @@
       "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Rose,Broken&state=open",
       "alttext": true
     },
-	"ultiextended": {
-		"friendly-name": "Ultimaker 2 Extended",
-		"method": "GIT",
-		"freq": 10,
-		"url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Ultimaker%20Extended,Broken&state=open",
-		"alttext": true
-	}
+    "ultiextended": {
+	"friendly-name": "Ultimaker 2 Extended",
+	"method": "GIT",
+	"freq": 10,
+	"url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Ultimaker%20Extended,Broken&state=open",
+	"alttext": true
+    },
     "doorbot1": {
       "friendly-name": "Doorbot 1",
       "method": "POST",
