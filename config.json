@@ -19,7 +19,7 @@
       "friendly-name": "Gerald (Big Laser Cutter)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22Tool%3A%20Large%20Laser%20Cutter%20(Gerald)%22%20label%3A%22Broken%22",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Laser%20Cutter%20-%20Large%20(Gerald)%22%20label%3ABroken",
       "xively-endpoint": "http://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
       "alttext": true
     },
@@ -27,7 +27,7 @@
       "friendly-name": "Sophia (Small Laser Cutter)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Small%20Laser%20Cutter%20(Sophia)%22%20label%3A%22Broken%22",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Laser%20Cutter%20-%20Small%20(Sophia)%22%20label%3ABroken%20",
       "alttext": true
     },
     "reprap": {
@@ -41,23 +41,30 @@
       "friendly-name": "Violet (UP3 3D Printer)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20UP3%203D%20Printer%20(Violet)%22%20label%3A%22Broken%22",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%203D%20Printer%20-%20UP3%20(Violet)%22%20label%3ABroken",
       "alttext": true
     },
     "rose": {
       "friendly-name": "Rose (UP3 3D Printer)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20UP3%203D%20Printer%20(Rose)%22%20label%3A%22Broken%22",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%203D%20Printer%20-%20UP3%20(Rose)%22%20label%3ABroken",
       "alttext": true
     },
 	"ultiextended": {
 		"friendly-name": "Ultimaker 2 Extended (3D Printer)",
 		"method": "GIT",
 		"freq": 10,
-		"url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Ultimaker%20Extended%20(3D%20Printer)%22%20label%3A%22Broken%22",
+		"url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%203D%20Printer%20-%20Ultimaker%20Extended%22%20label%3ABroken",
 		"alttext": true
 	},
+  "ultimaker": {
+    "friendly-name": "Ultimaker 2 (3D Printer)",
+    "method": "GIT",
+    "freq": 10,
+    "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%203D%20Printer%20-%20Ultimaker%202%22%20label%3ABroken",
+    "alttext": true
+  },
 	"bandsaw": {
       "friendly-name": "Bandsaw",
       "method": "GIT",
