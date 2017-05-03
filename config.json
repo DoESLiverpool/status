@@ -1,6 +1,6 @@
 {
   "settings": {
-    "title": "DoESLiverpool's Status",
+    "title": "DoESLiverpool Service Status",
     "timezone": "GMT",
     "port": 3000,
     "user-agent": "DoESLiverpool",
@@ -16,60 +16,60 @@
       "url": "http://doesliverpool.com/?json=get_recent_posts&count=1"
     },
     "gerald": {
-      "friendly-name": "Gerald the Gigantic Laser Cutter",
+      "friendly-name": "Gerald (Big Laser Cutter)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Gerald%20the%20Gigantic%20Laser%20Cutter,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22Tool%3A%20Large%20Laser%20Cutter%20(Gerald)%22%20label%3A%22Broken%22",
       "xively-endpoint": "http://api.xively.com/v2/feeds/757339326/datastreams/Gerald",
       "alttext": true
     },
     "sophia": {
-      "friendly-name": "Sophia the Smaller Laser Cutter",
+      "friendly-name": "Sophia (Small Laser Cutter)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Sophia%20the%20Smaller%20Laser%20Cutter,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Small%20Laser%20Cutter%20(Sophia)%22%20label%3A%22Broken%22",
       "alttext": true
     },
     "reprap": {
-      "friendly-name": "RepRap the 3d Printer",
+      "friendly-name": "RepRap (3D Printer)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=RepRap,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20RepRap%22%20label%3A%22Broken%22",
       "alttext": true
     },
     "violet": {
-      "friendly-name": "Violet the 3d Printer",
+      "friendly-name": "Violet (UP3 3D Printer)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Violet,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20UP3%203D%20Printer%20(Violet)%22%20label%3A%22Broken%22",
       "alttext": true
     },
     "rose": {
-      "friendly-name": "Rose the 3d Printer",
+      "friendly-name": "Rose (UP3 3D Printer)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Rose,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20UP3%203D%20Printer%20(Rose)%22%20label%3A%22Broken%22",
       "alttext": true
     },
 	"ultiextended": {
-		"friendly-name": "Ultimaker 2 Extended",
+		"friendly-name": "Ultimaker 2 Extended (3D Printer)",
 		"method": "GIT",
 		"freq": 10,
-		"url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Ultimaker%20Extended,Broken&state=open",
+		"url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Ultimaker%20Extended%20(3D%20Printer)%22%20label%3A%22Broken%22",
 		"alttext": true
 	},
 	"bandsaw": {
       "friendly-name": "Bandsaw",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Bandsaw,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Bandsaw%22%20label%3A%22Broken%22",
       "alttext": true
     },
 	"vacformer": {
-      "friendly-name": "Victor the Vac-Former",
+      "friendly-name": "Victor (Vac-Former)",
       "method": "GIT",
       "freq": 10,
-      "url": "https://api.github.com/repos/DoESLiverpool/somebody-should/issues?labels=Victor%20the%20Vac-Former,Broken&state=open",
+      "url": "https://github.com/DoESLiverpool/somebody-should/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3A%22Tool%3A%20Vac-Former%20(Victor)%22%20label%3A%22Broken%22",
       "alttext": true
     },
     "doorbot1": {
