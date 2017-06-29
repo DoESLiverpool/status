@@ -15,7 +15,7 @@ var files = require('./lib/files');
 var api = require('./routes/api');
 var index = require('./routes/index');
 
-server.listen(files.cfg['settings']['port']);
+server.listen(8080);
 
 hbs.registerHelper('grouped_each', function(every, context, options) {
   var out = "", subcontext = [], i = 0;
