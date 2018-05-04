@@ -63,5 +63,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Go debug files
+*.db
+debug
 
 # End of https://www.gitignore.io/api/go,macos,windows

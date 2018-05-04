@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/caarlos0/env"
 
@@ -15,9 +16,12 @@ import (
 
 // SystemSettings are the required settings for the system to know how to run
 type SystemSettings struct {
-	Port string `env:"HTTP_PORT"`
-	Mode string `env:"GIN_MODE"`
+	Port        string `env:"HTTP_PORT"`
+	Mode        string `env:"GIN_MODE"`
+	UpdateTimer int    `env:"UPDATE_TIME"`
 }
+
+var lastUpdated time.Time
 
 func main() {
 	var settings = SystemSettings{}
@@ -30,35 +34,14 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	fmt.Println("Updating data")
-	err := updateData()
-
-	if err != nil {
-		fmt.Println("Error updating data")
-		panic(err)
-		return
-	}
+	// Run the data fetcher in the background
+	go dataUpdater(settings.UpdateTimer)
 
 	router := gin.Default()
 
 	router.Use(static.Serve("/", static.LocalFile("./public", true)))
 
 	api := router.Group("/api")
-
-	// git := api.Group("/git")
-	// {
-	// git.GET("/labels", func(c *gin.Context) {
-	// c.JSON(http.StatusOK, labels)
-	// })
-
-	// git.GET("/issues", func(c *gin.Context) {
-	// c.JSON(http.StatusOK, issues)
-	// })
-
-	// git.GET("/services", func(c *gin.Context) {
-	// c.JSON(http.StatusOK, githubServices)
-	// })
-	// }
 
 	api.GET("/status", func(c *gin.Context) {
 		store := database.Store{}
@@ -75,12 +58,31 @@ func main() {
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, err)
 			} else {
-				c.JSON(http.StatusOK, services)
+				var response struct {
+					Updated  time.Time           `json:"updated"`
+					Services []*database.Service `json:"services"`
+				}
+
+				response.Updated = lastUpdated
+				response.Services = services
+
+				c.JSON(http.StatusOK, response)
 			}
 		}
 	})
 
 	router.Run(settings.Port)
+}
+
+func dataUpdater(updateTimer int) {
+	for {
+		fmt.Println("Updating data")
+		updateData()
+
+		lastUpdated = time.Now()
+
+		time.Sleep(time.Duration(updateTimer) * time.Second)
+	}
 }
 
 func updateData() error {

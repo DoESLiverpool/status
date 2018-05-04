@@ -15,7 +15,8 @@
             "GITHUB_ORG": "DoESLiverpool",
             "GITHUB_REPO": "somebody-should",
             "GITHUB_LABEL_PREFIX": "Tool:",
-            "GITHUB_LABEL_BROKEN": "Broken"
+            "GITHUB_LABEL_BROKEN": "Broken",
+            "UPDATE_TIME": 30
         }
     }
     ]
