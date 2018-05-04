@@ -119,9 +119,25 @@ func (s *ServiceHelper) UpdateServices(services []*Service) error {
 	for _, service := range services {
 		serv, err := s.GetService(service.ID)
 
+		// If the service isn't new do state checks
 		if serv != nil {
+
+			// If state matches set old time.
+			// Else create a history event for the service changing
 			if serv.State == service.State {
 				service.Since = serv.Since
+			} else {
+				var history = &History{
+					OldTimestamp: serv.Since,
+					NewTimestamp: service.Since,
+
+					ChangedFrom: serv.State,
+					ChangedTo:   serv.State,
+
+					ServiceID: service.ID,
+				}
+
+				s.store.History.CreateHistoryEvent(history)
 			}
 		}
 

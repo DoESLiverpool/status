@@ -13,6 +13,7 @@ import (
 type Store struct {
 	db      *bolt.DB
 	Service *ServiceHelper
+	History *HistoryHelper
 }
 
 // GetDatabase will connect to the database and ensure buckets exist
@@ -47,11 +48,20 @@ func (s *Store) GetDatabase(readOnly bool) error {
 		if err != nil {
 			return err
 		}
+
+		err = s.CreateBucket(HistoryBucket)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	// Create the service helper
 	s.Service = &ServiceHelper{}
 	s.Service.store = s
+
+	s.History = &HistoryHelper{}
+	s.History.store = s
 
 	return nil
 }
