@@ -113,3 +113,24 @@ func (s *ServiceHelper) GetService(id int64) (*Service, error) {
 
 	return &service, nil
 }
+
+// UpdateServices will update all the services in the db and add new ones
+func (s *ServiceHelper) UpdateServices(services []*Service) error {
+	for _, service := range services {
+		serv, err := s.GetService(service.ID)
+
+		if serv != nil {
+			if serv.State == service.State {
+				service.Since = serv.Since
+			}
+		}
+
+		err = s.CreateService(service)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

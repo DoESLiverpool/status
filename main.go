@@ -94,28 +94,17 @@ func updateData() error {
 
 	store := database.Store{}
 	err = store.GetDatabase(false)
+	defer store.CloseDatabase()
 
 	if err != nil {
 		return err
 	}
 
-	for _, githubService := range githubServices {
-		serv, err := store.Service.GetService(githubService.ID)
+	err = store.Service.UpdateServices(githubServices)
 
-		if serv != nil {
-			if serv.State == githubService.State {
-				githubService.Since = serv.Since
-			}
-		}
-
-		err = store.Service.CreateService(githubService)
-
-		if err != nil {
-			return err
-		}
+	if err != nil {
+		return err
 	}
-
-	store.CloseDatabase()
 
 	return nil
 }
