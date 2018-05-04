@@ -3,22 +3,15 @@ FROM golang
 ENV HTTP_PORT ":3000"
 
 ARG gin_mode="release"
-ENV GIN_MODE gin_mode
+ENV GIN_MODE="release"
 
-ARG github_token
-ENV GITHUB_TOKEN github_token
+ENV GITHUB_TOKEN=""
+ENV GITHUB_ORG=""
+ENV GITHUB_REPO=""
+ENV GITHUB_LABEL_PREFIX=""
+ENV GITHUB_LABEL_BROKEN=""
 
-ARG github_org
-ENV GITHUB_ORG github_org
-
-ARG github_repo
-ENV GITHUB_REPO github_repo
-
-ARG github_label_prefix
-ENV GITHUB_LABEL_PREFIX github_label_prefix
-
-ARG github_label_broken
-ENV GITHUB_LABEL_BROKEN github_label_broken
+ENV DATABASE_PATH=""
 
 WORKDIR /go/src/github.com/DoESLiverpool/status
 COPY . .
