@@ -2,8 +2,6 @@ package database
 
 import (
 	"encoding/binary"
-	"encoding/json"
-	"errors"
 	"os"
 	"path/filepath"
 	"time"
@@ -13,7 +11,8 @@ import (
 
 // Store is the database store used by the system
 type Store struct {
-	db *bolt.DB
+	db      *bolt.DB
+	Service *ServiceHelper
 }
 
 // GetDatabase will connect to the database and ensure buckets exist
@@ -43,12 +42,16 @@ func (s *Store) GetDatabase(readOnly bool) error {
 	}
 
 	if !readOnly {
-		err = s.GetBucket(ServiceBucket)
+		err = s.CreateBucket(ServiceBucket)
 
 		if err != nil {
 			return err
 		}
 	}
+
+	// Create the service helper
+	s.Service = &ServiceHelper{}
+	s.Service.store = s
 
 	return nil
 }
@@ -60,8 +63,8 @@ func (s *Store) CloseDatabase() {
 	}
 }
 
-// GetBucket will ensure a bucket exists
-func (s *Store) GetBucket(bucketName string) error {
+// CreateBucket will ensure a bucket exists
+func (s *Store) CreateBucket(bucketName string) error {
 	return s.db.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucketIfNotExists([]byte(bucketName))
 
@@ -70,81 +73,6 @@ func (s *Store) GetBucket(bucketName string) error {
 		}
 		return nil
 	})
-}
-
-// CreateService will create a new or update a service in the database
-func (s *Store) CreateService(u *Service) error {
-	return s.db.Update(func(tx *bolt.Tx) error {
-		// Retrieve the services bucket.
-		// This should be created when the DB is first opened.
-		b := tx.Bucket([]byte(ServiceBucket))
-
-		// Marshal user data into bytes.
-		buf, err := json.Marshal(*u)
-		if err != nil {
-			return err
-		}
-
-		// Persist bytes to users bucket.
-		return b.Put(idToKey(u.ID), buf)
-	})
-}
-
-// GetServices will return all the services in the database
-func (s *Store) GetServices() ([]*Service, error) {
-	var services []*Service
-	err := s.db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(ServiceBucket))
-
-		return b.ForEach(func(k, d []byte) error {
-
-			var service = Service{}
-
-			err := json.Unmarshal(d, &service)
-
-			if err != nil {
-				return err
-			}
-
-			services = append(services, &service)
-
-			return nil
-		})
-	})
-
-	if err != nil {
-		return nil, err
-	}
-
-	return services, nil
-}
-
-// GetService will return the service by id
-func (s *Store) GetService(id int64) (*Service, error) {
-	var service = &Service{}
-	err := s.db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(ServiceBucket))
-
-		d := b.Get(idToKey(id))
-
-		if d == nil {
-			return errors.New("No service found")
-		}
-
-		err := json.Unmarshal(d, *service)
-
-		if err != nil {
-			return err
-		}
-
-		return nil
-	})
-
-	if err != nil {
-		return nil, err
-	}
-
-	return service, nil
 }
 
 // itob returns an 8-byte big endian representation of v.

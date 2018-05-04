@@ -1,6 +1,12 @@
 package database
 
-import "time"
+import (
+	"encoding/json"
+	"errors"
+	"time"
+
+	bolt "github.com/coreos/bbolt"
+)
 
 // ServiceState is the possible state a service can be in
 type ServiceState int
@@ -27,3 +33,83 @@ type Service struct {
 
 // ServiceBucket is the name of the bucket that contains all the services
 const ServiceBucket = "services"
+
+// ServiceHelper is a helper for all service methods
+type ServiceHelper struct {
+	store *Store
+}
+
+// CreateService will create a new or update a service in the database
+func (s *ServiceHelper) CreateService(u *Service) error {
+	return s.store.db.Update(func(tx *bolt.Tx) error {
+		// Retrieve the services bucket.
+		// This should be created when the DB is first opened.
+		b := tx.Bucket([]byte(ServiceBucket))
+
+		// Marshal user data into bytes.
+		buf, err := json.Marshal(*u)
+		if err != nil {
+			return err
+		}
+
+		// Persist bytes to users bucket.
+		return b.Put(idToKey(u.ID), buf)
+	})
+}
+
+// GetServices will return all the services in the database
+func (s *ServiceHelper) GetServices() ([]*Service, error) {
+	var services []*Service
+	err := s.store.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(ServiceBucket))
+
+		return b.ForEach(func(k, d []byte) error {
+
+			var service = Service{}
+
+			err := json.Unmarshal(d, &service)
+
+			if err != nil {
+				return err
+			}
+
+			services = append(services, &service)
+
+			return nil
+		})
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return services, nil
+}
+
+// GetService will return the service by id
+func (s *ServiceHelper) GetService(id int64) (*Service, error) {
+	var service = Service{}
+	err := s.store.db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(ServiceBucket))
+
+		d := b.Get(idToKey(id))
+
+		if d == nil {
+			return errors.New("No service found")
+		}
+
+		err := json.Unmarshal(d, &service)
+
+		if err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &service, nil
+}

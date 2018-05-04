@@ -53,7 +53,7 @@ func main() {
 			c.JSON(http.StatusInternalServerError, err)
 		} else {
 
-			services, err := store.GetServices()
+			services, err := store.Service.GetServices()
 
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, err)
@@ -100,7 +100,15 @@ func updateData() error {
 	}
 
 	for _, githubService := range githubServices {
-		err := store.CreateService(githubService)
+		serv, err := store.Service.GetService(githubService.ID)
+
+		if serv != nil {
+			if serv.State == githubService.State {
+				githubService.Since = serv.Since
+			}
+		}
+
+		err = store.Service.CreateService(githubService)
 
 		if err != nil {
 			return err
