@@ -7,6 +7,21 @@
             <h1>UI not available</h1>
 
             <span>You can however view the JSON details for the status info by going to <a href="/api/status">/api/status</a></span>
+            <br>
+            <br>
+            <span>Each service has a state on it. You can see what each state number means by looking at the golang code below</span>
+            <pre>
+const (
+    // UnkownState is for when we can not determin if the service is working
+    UnkownState ServiceState = 0
+
+    // BrokenState is for when we know a service is broken
+    BrokenState ServiceState = 1
+
+    // WorkingState is for when we know a service is working
+    WorkingState ServiceState = 2
+)
+            </pre>
         </main>
     </body>
 </html>
