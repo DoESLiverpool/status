@@ -89,7 +89,7 @@ func (h *HistoryHelper) GetHistoryForService(serviceID int64) ([]*History, error
 func (h *HistoryHelper) getHistoryBucketForService(tx *bolt.Tx, serviceID int64) (*bolt.Bucket, error) {
 	b := tx.Bucket([]byte(HistoryBucket))
 
-	if b != nil {
+	if b != nil && tx.Writable() {
 		b, err := b.CreateBucketIfNotExists(idToKey(serviceID))
 
 		if err != nil {
