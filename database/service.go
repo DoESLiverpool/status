@@ -24,11 +24,14 @@ const (
 
 // Service is a service stored in the database
 type Service struct {
-	ID          int64        `json:"id" binding:"required"`
-	Name        string       `json:"name" binding:"required"`
-	State       ServiceState `json:"state"`
-	Description string       `json:"description"`
-	Since       time.Time    `json:"since"`
+	ID          int64  `json:"id" binding:"required"`
+	Name        string `json:"name" binding:"required"`
+	Description string `json:"description"`
+
+	State ServiceState `json:"state"`
+	Since time.Time    `json:"since"`
+
+	ServiceName string `json:"service_name"`
 }
 
 // ServiceBucket is the name of the bucket that contains all the services

@@ -247,10 +247,11 @@ func getGitServices(labels []*githubLabel, issues []*githubIssue) []*database.Se
 	// Create a service for each label
 	for _, label := range labels {
 		service := &database.Service{
-			ID:    *label.ID,
-			Name:  *label.Name,
-			State: database.WorkingState,
-			Since: time.Now(),
+			ID:          *label.ID,
+			Name:        *label.Name,
+			State:       database.WorkingState,
+			Since:       time.Now(),
+			ServiceName: "git",
 		}
 
 		if label.Description != nil {

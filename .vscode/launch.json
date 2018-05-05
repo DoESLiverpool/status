@@ -16,7 +16,8 @@
             "GITHUB_REPO": "somebody-should",
             "GITHUB_LABEL_PREFIX": "Tool:",
             "GITHUB_LABEL_BROKEN": "Broken",
-            "UPDATE_TIME": 30
+            "UPDATE_TIME": 30,
+            "DOORBOT_API_KEY": "tempToken"
         }
     }
     ]

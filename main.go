@@ -16,9 +16,10 @@ import (
 
 // SystemSettings are the required settings for the system to know how to run
 type SystemSettings struct {
-	Port        string `env:"HTTP_PORT"`
-	Mode        string `env:"GIN_MODE"`
-	UpdateTimer int    `env:"UPDATE_TIME"`
+	Port         string `env:"HTTP_PORT"`
+	Mode         string `env:"GIN_MODE"`
+	UpdateTimer  int    `env:"UPDATE_TIME"`
+	DoorbotToken string `env:"DOORBOT_API_KEY"`
 }
 
 var lastUpdated time.Time
@@ -42,6 +43,21 @@ func main() {
 	router.Use(static.Serve("/", static.LocalFile("./public", true)))
 
 	api := router.Group("/api")
+
+	api.POST("/doorbot", func(c *gin.Context) {
+		authHeader := c.GetHeader("Authorization")
+
+		if authHeader != "Bearer "+settings.DoorbotToken {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+
+		var doorbot services.Doorbot
+		c.BindJSON(&doorbot)
+		services.RecievePing(&doorbot)
+
+		c.JSON(http.StatusOK, doorbot)
+	})
 
 	api.GET("/status", func(c *gin.Context) {
 		store := database.Store{}
@@ -92,6 +108,12 @@ func updateData() error {
 		return err
 	}
 
+	doorbotServices, err := services.UpdateDoorbots()
+
+	if err != nil {
+		return err
+	}
+
 	store := database.Store{}
 	err = store.GetDatabase(false)
 	defer store.CloseDatabase()
@@ -100,10 +122,22 @@ func updateData() error {
 		return err
 	}
 
-	err = store.Service.UpdateServices(githubServices)
+	// Ensure git isn't updated whilst it is disabled
+	if githubServices != nil {
+		err = store.Service.UpdateServices(githubServices)
 
-	if err != nil {
-		return err
+		if err != nil {
+			return err
+		}
+	}
+
+	// Ensure doorbots aren't updated whilst disabled
+	if doorbotServices != nil {
+		err = store.Service.UpdateServices(doorbotServices)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

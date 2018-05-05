@@ -8,6 +8,13 @@ The system is built into a docker image and is stored in DockerHub at [doesliver
 ## Config
 The configuration is split into multiple sections based on what resource they belong to.
 
+### Update
+The system will check for git updates and doorbot updates based on an environment variable.
+During development this is set to 30 seconds. The docker image defaults to 5 minutes.
+
+#### Environment Variables
+`UPDATE_TIME`: The amount of time to wait before checking the services again. This is in seconds
+
 ### HTTP
 The service will by default use port 80 if no port is set however the service will support any format that the go HTTP server will support
 
@@ -45,15 +52,13 @@ The doorbot service requires them to push their uptime to the service to be mark
 
 `DOORBOT_API_KEY`: This is the key that the doorbots are required to send when informing the system they are online
 
-`DOORBOT_TIMEOUT`: Sets the timeout for the doorbot to be marked as offline. This timeout is in minutes
-
 #### API
 To mark a doorbot online you need to send a post request with an authorization header and the body must contain a dootbot name and a timestamp.
 
 ````
-POST /api/doorbot/update
+POST /api/doorbot
 Authorization: Bearer DOORBOT_API_KEY
 Content-Type: application/json
 
-name={doorbot_name}&timestamp={time}
+id={doorbot_id}&timestamp={time}
 ````
