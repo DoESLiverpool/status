@@ -12,8 +12,8 @@ import (
 type ServiceState int
 
 const (
-	// UnkownState is for when we can not determin if the service is working
-	UnkownState ServiceState = 0
+	// UnknownState is for when we can not determine if the service is working
+	UnknownState ServiceState = 0
 
 	// BrokenState is for when we know a service is broken
 	BrokenState ServiceState = 1
@@ -135,7 +135,7 @@ func (s *ServiceHelper) UpdateServices(services []*Service) error {
 					NewTimestamp: service.Since,
 
 					ChangedFrom: serv.State,
-					ChangedTo:   serv.State,
+					ChangedTo:   service.State,
 
 					ServiceID: service.ID,
 				}
