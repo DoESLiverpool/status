@@ -3,16 +3,15 @@ package database
 import (
 	"encoding/json"
 	"errors"
+	"strconv"
 	"time"
 
 	bolt "github.com/coreos/bbolt"
-
-	"github.com/google/uuid"
 )
 
 // History is an event that happens when a service changes state
 type History struct {
-	ID uuid.UUID `json:"id" binding:"required"`
+	ID int64 `json:"id" binding:"required"`
 
 	OldTimestamp time.Time `json:"old_timestamp" binding:"required"`
 	NewTimestamp time.Time `json:"new_timestamp" binding:"required"`
@@ -40,16 +39,19 @@ func (h *HistoryHelper) CreateHistoryEvent(history *History) error {
 			return err
 		}
 
-		history.ID = uuid.New()
+		id, _ := b.NextSequence()
+		history.ID = int64(id)
 
-		// Marshal user data into bytes.
+		// Marshal history data into bytes.
 		buf, err := json.Marshal(*history)
 		if err != nil {
 			return err
 		}
 
-		// Persist bytes to users bucket.
-		return b.Put([]byte(history.ID.String()), buf)
+		idString := strconv.FormatInt(history.ID, 10)
+
+		// Persist bytes into service id bucket.
+		return b.Put([]byte(idString), buf)
 	})
 }
 
@@ -87,16 +89,23 @@ func (h *HistoryHelper) GetHistoryForService(serviceID int64) ([]*History, error
 }
 
 func (h *HistoryHelper) getHistoryBucketForService(tx *bolt.Tx, serviceID int64) (*bolt.Bucket, error) {
-	b := tx.Bucket([]byte(HistoryBucket))
+	historyBucket := tx.Bucket([]byte(HistoryBucket))
+	id := strconv.FormatInt(serviceID, 10)
 
-	if b != nil && tx.Writable() {
-		b, err := b.CreateBucketIfNotExists(idToKey(serviceID))
+	if historyBucket != nil && tx.Writable() {
+		innerBucket, err := historyBucket.CreateBucketIfNotExists([]byte(id))
 
 		if err != nil {
 			return nil, err
 		}
 
-		return b, nil
+		return innerBucket, nil
+	} else if historyBucket != nil {
+		innerBucket := historyBucket.Bucket([]byte(id))
+
+		if innerBucket != nil {
+			return innerBucket, nil
+		}
 	}
 
 	return nil, errors.New("No bucket found")

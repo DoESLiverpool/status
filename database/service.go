@@ -3,6 +3,7 @@ package database
 import (
 	"encoding/json"
 	"errors"
+	"strconv"
 	"time"
 
 	bolt "github.com/coreos/bbolt"
@@ -50,13 +51,22 @@ func (s *ServiceHelper) CreateService(u *Service) error {
 		b := tx.Bucket([]byte(ServiceBucket))
 
 		// Marshal user data into bytes.
-		buf, err := json.Marshal(*u)
+		buf, err := json.Marshal(u)
 		if err != nil {
 			return err
 		}
 
+		// Convert the id from an int to a string for storage
+		var id = strconv.FormatInt(u.ID, 10)
+
 		// Persist bytes to users bucket.
-		return b.Put(idToKey(u.ID), buf)
+		err = b.Put([]byte(id), buf)
+
+		if err != nil {
+			return err
+		}
+
+		return nil
 	})
 }
 
@@ -95,7 +105,9 @@ func (s *ServiceHelper) GetService(id int64) (*Service, error) {
 	err := s.store.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(ServiceBucket))
 
-		d := b.Get(idToKey(id))
+		idString := strconv.FormatInt(id, 10)
+
+		d := b.Get([]byte(idString))
 
 		if d == nil {
 			return errors.New("No service found")
@@ -140,7 +152,10 @@ func (s *ServiceHelper) UpdateServices(services []*Service) error {
 					ServiceID: service.ID,
 				}
 
-				s.store.History.CreateHistoryEvent(history)
+				err = s.store.History.CreateHistoryEvent(history)
+				if err != nil {
+					return err
+				}
 			}
 		}
 

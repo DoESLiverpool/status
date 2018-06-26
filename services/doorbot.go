@@ -38,7 +38,6 @@ func UpdateDoorbots() ([]*database.Service, error) {
 
 	store := database.Store{}
 	err := store.GetDatabase(true)
-	defer store.CloseDatabase()
 
 	if err != nil {
 		return nil, err
@@ -49,6 +48,8 @@ func UpdateDoorbots() ([]*database.Service, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	store.CloseDatabase()
 
 	var foundDoorbots []*database.Service
 
