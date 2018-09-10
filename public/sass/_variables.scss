@@ -1,0 +1,22 @@
+$color-midnight-blue: #1b1d21;
+$color-bright-orange: #ff7b29;
+$color-bright-green: #2ecc71;
+$color-bright-red: #e74c3c;
+$color-bright-yellow: #f1c40f;
+$color-white: #fff;
+
+$grid-gutter-width: 30px;
+$container-max-width: 50em;
+
+$font-family-base: Helvetica, Arial, sans-serif;
+$font-size-base: 16px;
+$font-weight-base: normal;
+$line-height-base: 1.5;
+
+$body-background: $color-midnight-blue;
+$body-color: $color-white;
+
+$link-color: $color-bright-orange;
+$link-decoration: none;
+$link-hover-color: lighten($color-bright-orange, 10%);
+$link-hover-decoration: underline;

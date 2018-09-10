@@ -1,5 +1,6 @@
+public/css
 
-# Created by https://www.gitignore.io/api/go,macos,windows
+# Created by https://www.gitignore.io/api/go,macos,windows,sass
 
 ### Go ###
 # Binaries for programs and plugins
@@ -15,8 +16,13 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+### Go Patch ###
+/vendor/
+/Godeps/
+
 ### macOS ###
-*.DS_Store
+# General
+.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -42,14 +48,23 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
+# Dump file
+*.stackdump
+
 # Folder config file
-Desktop.ini
+[Dd]esktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
@@ -57,14 +72,12 @@ $RECYCLE.BIN/
 # Windows Installer files
 *.cab
 *.msi
+*.msix
 *.msm
 *.msp
 
 # Windows shortcuts
 *.lnk
 
-# Go debug files
-*.db
-debug
 
-# End of https://www.gitignore.io/api/go,macos,windows
+# End of https://www.gitignore.io/api/go,macos,windows,sass

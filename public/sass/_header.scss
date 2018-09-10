@@ -1,0 +1,25 @@
+.site-header {
+    @include clearfix();
+    padding: 1em 0;
+    border-bottom: 1px solid lighten($body-background, 10%);
+}
+
+.site-logo {
+    float: left;
+}
+
+.site-nav {
+    @include list-unstyled();
+    @include clearfix();
+    float: right;
+    margin-left: ($grid-gutter-width / 2) * -1;
+    margin-right: ($grid-gutter-width / 2) * -1;
+
+    li {
+        float: left;
+    }
+
+    a {
+        padding: 0 ($grid-gutter-width / 2);
+    }
+}
