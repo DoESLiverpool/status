@@ -1,18 +1,40 @@
-<html>
+<!doctype html>
+<html class="no-js">
     <head>
+        <meta charset="utf-8">
         <title>Status</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/css/main.css">
+        <script>
+            var c = document.documentElement.className;
+            c = c.replace("no-js", "js");
+        </script>
     </head>
     <body>
-        <main>
-            <h1>UI not available</h1>
+        <header class="site-header">
+            <div class="container">
+                <a href="/" class="site-logo"><strong>status</strong>.doesliverpool.com</a>
+                <ul class="site-nav">
+                    <li><a href="/api/status">JSON API</a></li>
+                    <li><a href="https://github.com/doesliverpool/status">Source code</a></li>
+                    <li><a href="https://github.com/doesliverpool/somebody-should">Issue tracker</a></li>
+                </ul>
+            </div>
+        </header>
 
-            <span>You can however view the JSON details for the status info by going to <a href="/api/status">/api/status</a></span>
-            <br>
-            <br>
-            <span>Each service has a state on it. You can see what each state number means by looking at the golang code below</span>
-            <pre>
-const (
-    // UnkownState is for when we can not determin if the service is working
+        <main class="container js-status-container">
+            <p class="blank-state">
+                Status could not be displayed.
+                <a href="/api/status">Try viewing the raw API output instead.</a>
+            </p>
+        </main>
+
+        <aside class="container">
+            <h1>Call the status API</h1>
+            <p>Status information available via our JSON API: <a href="/api/status">/api/status</a></p>
+            <p>Each service has a state. You can see what each state number means by looking at the golang code below:</p>
+            <pre>const (
+    // UnkownState is for when we can not determine whether the service is working
     UnkownState ServiceState = 0
 
     // BrokenState is for when we know a service is broken
@@ -20,8 +42,31 @@ const (
 
     // WorkingState is for when we know a service is working
     WorkingState ServiceState = 2
-)
-            </pre>
-        </main>
+)</pre>
+        </aside>
+
+        <script id="loadingTemplate" type="text/x-jsrender">
+            <p class="loading-state">Loading status…</p>
+        </script>
+
+        <script id="serviceTemplate" type="text/x-jsrender">
+            <div class="service service--{{:state}}">
+                <p class="service__name">{{:name}}</p>
+                <p class="service__since">{{:since}}</p>
+                <p class="service__state">{{:state}}</p>
+            </div>
+        </script>
+
+        <script id="errorTemplate" type="text/x-jsrender">
+            <p class="blank-state">
+                Status could not be displayed.
+                <a href="/api/status">Try viewing the raw API output instead.</a>
+            </p>
+        </script>
+
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/jsrender-0.9.90.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
